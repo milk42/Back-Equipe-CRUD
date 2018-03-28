@@ -1,9 +1,11 @@
 package co.simplon.Repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import co.simplon.ModelEntity.SuspectModel;
+import co.simplon.ModelEntity.Suspect;
 
-public interface IRepositorySuspect extends JpaRepository<SuspectModel, Long>{
+@Repository
+public interface IRepositorySuspect extends JpaRepository<Suspect, Long>{
 
 }

@@ -2,9 +2,7 @@ package co.simplon.ModelEntity;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,19 +12,18 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "affaire")
 @EntityListeners(AuditingEntityListener.class)
-public class AffaireModel implements Serializable{
+public class Affaire implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -41,56 +38,48 @@ public class AffaireModel implements Serializable{
 	private String lieu;
 	@Column(length=40)
 	private String rapport;
-
-
-	@OneToMany(cascade= CascadeType.ALL, mappedBy="affaire")
-	private Set<VehiculeModel> listVehicule= new HashSet<> ();
+	@OneToMany(fetch = FetchType.EAGER, cascade= CascadeType.ALL, orphanRemoval = true, mappedBy="affaire")
+	private List<VehiculeImplique> listVehiculeImplique;
+	@OneToMany(fetch = FetchType.EAGER, cascade= CascadeType.ALL, orphanRemoval = true, mappedBy="affaire")
+	private List<ArmeImpliquee> listArmeImpliquee;
+	@OneToMany(fetch = FetchType.EAGER, cascade= CascadeType.ALL, orphanRemoval = true, mappedBy="affaire")
+	private List<AgentAffecte> listAgentAffecte;
+	@OneToMany(fetch = FetchType.EAGER, cascade= CascadeType.ALL, orphanRemoval = true, mappedBy="affaire")
+	private List<Suspect> listSuspect;
+	@OneToMany(fetch = FetchType.EAGER, cascade= CascadeType.ALL, orphanRemoval = true, mappedBy="affaire")
+	private List<Victime> listVictime;
+	@OneToMany(fetch = FetchType.EAGER, cascade= CascadeType.ALL, orphanRemoval = true, mappedBy="affaire")
+	private List<Temoin> listTemoin;
 	
-	
-	@OneToMany(cascade= CascadeType.ALL, mappedBy="affaire")
-	private List<ArmeModel> listArme;
-	
-	@OneToMany(cascade= CascadeType.ALL, mappedBy="affaire")
-	private List<AgentAffecteModel> listAgentAffecte;
-	
-	@OneToMany(cascade= CascadeType.ALL, mappedBy="affaire")
-	private List<SuspectModel> listSuspect;
-	
-	@OneToMany(cascade= CascadeType.ALL, mappedBy="affaire")
-	private List<VictimeModel> listVictime;
-	
-	@OneToMany(cascade= CascadeType.ALL,mappedBy="affaire")
-	private List<TemoinModel> listTemoin;
-	
-	public List<VictimeModel> getListVictime() {
+	public List<Victime> getListVictime() {
 		return listVictime;
 	}
-	public void setListVictime(List<VictimeModel> listVictime) {
+	public void setListVictime(List<Victime> listVictime) {
 		this.listVictime = listVictime;
-	}
-	public List<TemoinModel> getListTemoin() {
+	}	
+	public List<Temoin> getListTemoin() {
 		return listTemoin;
 	}
-	public void setListTemoin(List<TemoinModel> listTemoin) {
+	public void setListTemoin(List<Temoin> listTemoin) {
 		this.listTemoin = listTemoin;
-	}
-	public List<SuspectModel> getListSuspect() {
+	}	
+	public List<Suspect> getListSuspect() {
 		return listSuspect;
-	}
-	public void setListSuspect(List<SuspectModel> listSuspect) {
+	}	
+	public void setListSuspect(List<Suspect> listSuspect) {
 		this.listSuspect = listSuspect;
-	}
-	public List<AgentAffecteModel> getListAgentAffecte() {
+	}	
+	public List<AgentAffecte> getListAgentAffecte() {
 		return listAgentAffecte;
 	}
-	public void setListAgentAffecte(List<AgentAffecteModel> listAgentAffecte) {
+	public void setListAgentAffecte(List<AgentAffecte> listAgentAffecte) {
 		this.listAgentAffecte = listAgentAffecte;
 	}
-	public List<ArmeModel> getListArme() {
-		return listArme;
+	public List<ArmeImpliquee> getListArmeImpliquee() {
+		return listArmeImpliquee;
 	}
-	public void setListArme(List<ArmeModel> listArme) {
-		this.listArme = listArme;
+	public void setListArmeImpliquee(List<ArmeImpliquee> listArmeImpliquee) {
+		this.listArmeImpliquee = listArmeImpliquee;
 	}
 	public String getNom() {
 		return nom;
@@ -128,12 +117,11 @@ public class AffaireModel implements Serializable{
 	public void setRapport(String rapport) {
 		this.rapport = rapport;
 	}
+	public List<VehiculeImplique> getListVehiculeImplique() {
+		return listVehiculeImplique;
+	}
+	public void setListVehiculeImplique(List<VehiculeImplique> listVehiculeImplique) {
+		this.listVehiculeImplique = listVehiculeImplique;
+	}
 
-	public Set<VehiculeModel> getListVehicule() {
-		return listVehicule;
-	}
-	public void setListVehicule(Set<VehiculeModel> listVehicule) {
-		this.listVehicule = listVehicule;
-	}
-	
 }

@@ -11,52 +11,46 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.simplon.ModelEntity.VictimeModel;
+import co.simplon.ModelEntity.Victime;
 import co.simplon.Repository.IRepositoryVictime;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
+@RequestMapping("/temoin")
 public class VictimeController {
 	
 	@Autowired
 	private IRepositoryVictime iRepositoryVictime;
-	
-	
-	@GetMapping(value="/victimes")
-	public List<VictimeModel> GetVictime() {
 		
+	@GetMapping(value="/list")
+	public List<Victime> getListVictime() {
 		return iRepositoryVictime.findAll();
-		
 	}
 	
-	@PostMapping(value="/ajoutVictime") 
-	public VictimeModel PostVictime(@RequestBody VictimeModel victime) {
+	@PostMapping(value="/create") 
+	public Victime createVictime(@RequestBody Victime victime) {
 		return iRepositoryVictime.save(victime);
 	}
 	
-
-	@DeleteMapping(value="/supprimeVictime/{id}")
-	public void DeleteVictime(@PathVariable Long id) {
+	@DeleteMapping(value="/delete/{id}")
+	public void deleteVictime(@PathVariable Long id) {
 		iRepositoryVictime.deleteById(id);
 	}
 	
-	@GetMapping(value="victime/{id}")
-	public Optional<VictimeModel> GetVictime(@PathVariable Long id) {
+	@GetMapping(value="detail/{id}")
+	public Optional<Victime> getVictime(@PathVariable Long id) {
 		return iRepositoryVictime.findById(id);
 	}
-	
 
-
-	@PutMapping(value="/editVictime/{id}") 
-	public VictimeModel editVictime(@RequestBody VictimeModel victime,@PathVariable ("id") Long id) {
-		VictimeModel victimeToUpdate = iRepositoryVictime.getOne(id);
+	@PutMapping(value="/edit/{id}") 
+	public Victime editVictime(@RequestBody Victime victime,@PathVariable ("id") Long id) {
+		Victime victimeToUpdate = iRepositoryVictime.getOne(id);
 		victimeToUpdate.setTypeAgression(victime.getTypeAgression());
 		victimeToUpdate.setAffaire(victime.getAffaire());
-		
 		return iRepositoryVictime.save(victimeToUpdate);
 	}
-
 
 }

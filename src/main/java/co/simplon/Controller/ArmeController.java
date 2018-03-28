@@ -11,56 +11,46 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.simplon.ModelEntity.ArmeModel;
+import co.simplon.ModelEntity.Arme;
 import co.simplon.Repository.IRepositoryArme;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
+@RequestMapping("/arme")
 public class ArmeController {
 	
 	@Autowired 
 	private IRepositoryArme iRepositoryArme;
 	
-	
-	
-	@GetMapping(value="/armes")
-	public List<ArmeModel> GetArme() {
+	@GetMapping(value="/list")
+	public List<Arme> getListArme() {
 		return iRepositoryArme.findAll();
-		
 	}
 	
-	
-	
-	@PostMapping(value="/ajoutArme") 
-	public ArmeModel PostArme(@RequestBody ArmeModel arme) {
+	@PostMapping(value="/create") 
+	public Arme createArme(@RequestBody Arme arme) {
 		return iRepositoryArme.save(arme);
 	}
-	
-	
 
-	@DeleteMapping(value="/supprimeArme/{id}")
-	public void DeleteArme(@PathVariable Long id) {
+	@DeleteMapping(value="/delete/{id}")
+	public void deleteArme(@PathVariable Long id) {
 		iRepositoryArme.deleteById(id);
 	}
 	
-	
-	
-	@GetMapping(value="arme/{id}")
-	public Optional<ArmeModel> GetArme(@PathVariable Long id) {
+	@GetMapping(value="detail/{id}")
+	public Optional<Arme> getArme(@PathVariable Long id) {
 		return iRepositoryArme.findById(id);
 	}
-	
 
-
-	@PutMapping(value="/editArme/{id}") 
-	public ArmeModel editArme(@RequestBody ArmeModel arme,@PathVariable ("id") Long id) {
-		ArmeModel armeToUpdate = iRepositoryArme.getOne(id);
+	@PutMapping(value="/edit/{id}") 
+	public Arme editArme(@RequestBody Arme arme,@PathVariable ("id") Long id) {
+		Arme armeToUpdate = iRepositoryArme.getOne(id);
 		armeToUpdate.setModele(arme.getModele());
 		armeToUpdate.setType(arme.getType());
 		armeToUpdate.setAffaire(arme.getAffaire());
-
 		return iRepositoryArme.save(armeToUpdate);
 	}
 

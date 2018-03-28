@@ -11,52 +11,46 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.simplon.ModelEntity.TemoinModel;
+import co.simplon.ModelEntity.Temoin;
 import co.simplon.Repository.IRepositoryTemoin;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
+@RequestMapping("/temoin")
 public class TemoinController {
 	
 	@Autowired
 	private IRepositoryTemoin iRepositoryTemoin;
 	
-	
-	@GetMapping(value="/temoins")
-	public List<TemoinModel> GetTemoin() {
-		
-		return iRepositoryTemoin.findAll();
-		
+	@GetMapping(value="/list")
+	public List<Temoin> getListTemoin() {	
+		return iRepositoryTemoin.findAll();	
 	}
 	
-	@PostMapping(value="/ajoutTemoin") 
-	public TemoinModel PostTemoin(@RequestBody TemoinModel temoin) {
+	@PostMapping(value="/create") 
+	public Temoin createTemoin(@RequestBody Temoin temoin) {
 		return iRepositoryTemoin.save(temoin);
 	}
 	
-
-	@DeleteMapping(value="/supprimeTemoin/{id}")
-	public void DeleteTemoin(@PathVariable Long id) {
+	@DeleteMapping(value="/delete/{id}")
+	public void deleteTemoin(@PathVariable Long id) {
 		iRepositoryTemoin.deleteById(id);
 	}
 	
-	@GetMapping(value="temoin/{id}")
-	public Optional<TemoinModel> GetTemoin(@PathVariable Long id) {
+	@GetMapping(value="detail/{id}")
+	public Optional<Temoin> getTemoin(@PathVariable Long id) {
 		return iRepositoryTemoin.findById(id);
 	}
-	
 
-
-	@PutMapping(value="/editTemoin/{id}") 
-	public TemoinModel editTemoin(@RequestBody TemoinModel temoin,@PathVariable ("id") Long id) {
-		TemoinModel temoinToUpdate = iRepositoryTemoin.getOne(id);
+	@PutMapping(value="/edit/{id}") 
+	public Temoin editTemoin(@RequestBody Temoin temoin,@PathVariable ("id") Long id) {
+		Temoin temoinToUpdate = iRepositoryTemoin.getOne(id);
 		temoinToUpdate.setTemoignage(temoin.getTemoignage());
-		temoinToUpdate.setAffaire(temoin.getAffaire());
-		
+		temoinToUpdate.setAffaire(temoin.getAffaire());		
 		return iRepositoryTemoin.save(temoinToUpdate);
 	}
-
 
 }

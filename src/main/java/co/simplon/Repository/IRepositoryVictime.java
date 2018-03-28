@@ -1,9 +1,11 @@
 package co.simplon.Repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import co.simplon.ModelEntity.VictimeModel;
+import co.simplon.ModelEntity.Victime;
 
-public interface IRepositoryVictime extends JpaRepository<VictimeModel, Long> {
+@Repository
+public interface IRepositoryVictime extends JpaRepository<Victime, Long> {
 
 }

@@ -1,9 +1,11 @@
 package co.simplon.Repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import co.simplon.ModelEntity.ArmeModel;
+import co.simplon.ModelEntity.Arme;
 
-public interface IRepositoryArme extends JpaRepository<ArmeModel, Long>{
+@Repository
+public interface IRepositoryArme extends JpaRepository<Arme, Long>{
 
 }
