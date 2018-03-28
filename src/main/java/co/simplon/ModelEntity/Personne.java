@@ -24,13 +24,13 @@ public class Personne implements Serializable{
 	private String nom;
 	@Column(length=40)
 	private String prenom;
-	@OneToMany(fetch = FetchType.LAZY, cascade= CascadeType.ALL, orphanRemoval = true, mappedBy="agentAffecte")
+	@OneToMany(fetch = FetchType.LAZY, cascade= CascadeType.ALL, orphanRemoval = true, mappedBy="personne")
 	private List<AgentAffecte> listAgentAffecte;
-	@OneToMany(fetch = FetchType.LAZY, cascade= CascadeType.ALL, orphanRemoval = true, mappedBy="suspect")
+	@OneToMany(fetch = FetchType.LAZY, cascade= CascadeType.ALL, orphanRemoval = true, mappedBy="personne")
 	private List<Suspect> listSuspect;
-	@OneToMany(fetch = FetchType.LAZY, cascade= CascadeType.ALL, orphanRemoval = true, mappedBy="temoin")
+	@OneToMany(fetch = FetchType.LAZY, cascade= CascadeType.ALL, orphanRemoval = true, mappedBy="personne")
 	private List<Temoin> listTemoin;
-	@OneToMany(fetch = FetchType.LAZY, cascade= CascadeType.ALL, orphanRemoval = true, mappedBy="victime")
+	@OneToMany(fetch = FetchType.LAZY, cascade= CascadeType.ALL, orphanRemoval = true, mappedBy="personne")
 	private List<Victime> listVictime;
 	
 	public Long getId() {

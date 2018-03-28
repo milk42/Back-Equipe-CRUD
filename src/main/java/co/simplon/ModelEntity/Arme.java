@@ -33,7 +33,7 @@ public class Arme implements Serializable{
 	@JoinColumn(name="id_affaire")
 	@JsonIgnore
 	private Affaire affaire;
-	@OneToMany(fetch = FetchType.LAZY, cascade= CascadeType.ALL, orphanRemoval = true, mappedBy="armeImpliquee")
+	@OneToMany(fetch = FetchType.LAZY, cascade= CascadeType.ALL, orphanRemoval = true, mappedBy="arme")
 	private List<ArmeImpliquee> listArmeImpliquee;
 		
 	public String getModele() {

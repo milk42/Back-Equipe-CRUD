@@ -19,7 +19,7 @@ import co.simplon.Repository.IRepositoryVictime;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
-@RequestMapping("/temoin")
+@RequestMapping("/victime")
 public class VictimeController {
 	
 	@Autowired

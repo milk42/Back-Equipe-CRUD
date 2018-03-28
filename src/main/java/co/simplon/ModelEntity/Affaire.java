@@ -38,17 +38,17 @@ public class Affaire implements Serializable{
 	private String lieu;
 	@Column(length=40)
 	private String rapport;
-	@OneToMany(fetch = FetchType.EAGER, cascade= CascadeType.ALL, orphanRemoval = true, mappedBy="affaire")
+	@OneToMany(fetch = FetchType.LAZY, cascade= CascadeType.ALL, orphanRemoval = true, mappedBy="affaire")
 	private List<VehiculeImplique> listVehiculeImplique;
-	@OneToMany(fetch = FetchType.EAGER, cascade= CascadeType.ALL, orphanRemoval = true, mappedBy="affaire")
+	@OneToMany(fetch = FetchType.LAZY, cascade= CascadeType.ALL, orphanRemoval = true, mappedBy="affaire")
 	private List<ArmeImpliquee> listArmeImpliquee;
-	@OneToMany(fetch = FetchType.EAGER, cascade= CascadeType.ALL, orphanRemoval = true, mappedBy="affaire")
+	@OneToMany(fetch = FetchType.LAZY, cascade= CascadeType.ALL, orphanRemoval = true, mappedBy="affaire")
 	private List<AgentAffecte> listAgentAffecte;
-	@OneToMany(fetch = FetchType.EAGER, cascade= CascadeType.ALL, orphanRemoval = true, mappedBy="affaire")
+	@OneToMany(fetch = FetchType.LAZY, cascade= CascadeType.ALL, orphanRemoval = true, mappedBy="affaire")
 	private List<Suspect> listSuspect;
-	@OneToMany(fetch = FetchType.EAGER, cascade= CascadeType.ALL, orphanRemoval = true, mappedBy="affaire")
+	@OneToMany(fetch = FetchType.LAZY, cascade= CascadeType.ALL, orphanRemoval = true, mappedBy="affaire")
 	private List<Victime> listVictime;
-	@OneToMany(fetch = FetchType.EAGER, cascade= CascadeType.ALL, orphanRemoval = true, mappedBy="affaire")
+	@OneToMany(fetch = FetchType.LAZY, cascade= CascadeType.ALL, orphanRemoval = true, mappedBy="affaire")
 	private List<Temoin> listTemoin;
 	
 	public List<Victime> getListVictime() {

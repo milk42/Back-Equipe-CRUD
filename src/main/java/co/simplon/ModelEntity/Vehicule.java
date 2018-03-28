@@ -41,7 +41,7 @@ public class Vehicule implements Serializable{
 	@JoinColumn(name = "id_personne")
 	@JsonIgnore
 	private Personne personne;
-	@OneToMany(fetch = FetchType.LAZY, cascade= CascadeType.ALL, orphanRemoval = true, mappedBy="vehiculeImplique")
+	@OneToMany(fetch = FetchType.LAZY, cascade= CascadeType.ALL, orphanRemoval = true, mappedBy="vehicule")
 	private List<VehiculeImplique> listVehiculeImplique;
 	
 	public Long getId_vehicule() {
