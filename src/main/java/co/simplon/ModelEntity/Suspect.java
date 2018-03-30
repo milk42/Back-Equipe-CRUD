@@ -32,11 +32,13 @@ public class Suspect implements Serializable{
 	@Column(length=10)
 	private String taille;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="id_affaire", nullable = false)
+	@JoinColumn(name="id_affaire")
+//	nullable = false
 	@JsonIgnore
 	private Affaire affaire;
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "id_personne", nullable = false)
+	@JoinColumn(name = "id_personne")
+//	nullable = false
 	@JsonIgnore
 	private Personne personne;
 	
